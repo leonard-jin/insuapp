@@ -1,15 +1,15 @@
-package com.heroku.insuapp.web.controllers.external;
+package com.heroku.insuapp.entrypoints.controllers.any;
 
-import com.heroku.insuapp.web.controllers.commons.DefaultExternalController;
-import org.springframework.stereotype.Controller;
+import com.heroku.insuapp.entrypoints.controllers.BaseRestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by kh.jin on 2020. 2. 12.
  */
-@Controller
-public class MainController implements DefaultExternalController {
+@RestController
+public class MainRestController implements BaseRestController {
 
     @GetMapping("/main")
     public @ResponseBody String pageHome() {
