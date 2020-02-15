@@ -1,6 +1,7 @@
 package com.therich.apps.core.members.persistences.codes;
 
 import com.therich.apps.globals.exceptions.BusinessException;
+import com.therich.apps.globals.exceptions.codes.BusinessErrorCode;
 import lombok.Getter;
 
 import java.util.Map;
@@ -29,6 +30,6 @@ public enum RoleCode {
             Stream.of(RoleCode.values()).collect(Collectors.toMap(RoleCode::getCode, Function.identity()));
 
     public RoleCode from(int code) {
-        return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException());
+        return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException(BusinessErrorCode.EMPTY));
     }
 }
