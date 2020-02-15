@@ -1,4 +1,4 @@
-package com.heroku.insuapp.globals.persistences;
+package com.therich.apps.globals.persistences;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

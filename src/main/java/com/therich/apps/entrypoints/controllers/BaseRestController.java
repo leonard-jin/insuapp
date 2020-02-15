@@ -1,4 +1,4 @@
-package com.heroku.insuapp.entrypoints.controllers;
+package com.therich.apps.entrypoints.controllers;
 
 import org.springframework.validation.BindingResult;
 

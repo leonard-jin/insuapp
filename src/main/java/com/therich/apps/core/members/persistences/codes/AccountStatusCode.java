@@ -1,4 +1,4 @@
-package com.heroku.insuapp.core.members.persistences.codes;
+package com.therich.apps.core.members.persistences.codes;
 
 import lombok.Getter;
 

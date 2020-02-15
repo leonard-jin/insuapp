@@ -1,4 +1,4 @@
-package com.heroku.insuapp.globals.exceptions;
+package com.therich.apps.globals.exceptions;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

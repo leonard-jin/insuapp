@@ -1,4 +1,4 @@
-package com.heroku.insuapp.entrypoints.controllers.any;
+package com.therich.apps.entrypoints.controllers.any;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

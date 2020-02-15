@@ -1,4 +1,4 @@
-package com.heroku.insuapp.globals.exceptions;
+package com.therich.apps.globals.exceptions;
 
 /**
  * Created by kh.jin on 2020. 2. 12.

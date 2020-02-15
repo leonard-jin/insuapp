@@ -1,6 +1,6 @@
-package com.heroku.insuapp.core.members.persistences.entities;
+package com.therich.apps.core.members.persistences.entities;
 
-import com.heroku.insuapp.globals.persistences.Auditable;
+import com.therich.apps.globals.persistences.Auditable;
 import lombok.*;
 
 import javax.persistence.*;

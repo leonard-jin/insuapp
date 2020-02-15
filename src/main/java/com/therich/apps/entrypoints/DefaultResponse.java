@@ -1,4 +1,4 @@
-package com.heroku.insuapp.entrypoints;
+package com.therich.apps.entrypoints;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

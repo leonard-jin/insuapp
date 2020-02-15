@@ -1,6 +1,6 @@
-package com.heroku.insuapp.configurations;
+package com.therich.apps.configurations;
 
-import com.heroku.insuapp.globals.persistences.AuditorAwareImpl;
+import com.therich.apps.globals.persistences.AuditorAwareImpl;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;

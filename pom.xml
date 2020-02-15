@@ -8,8 +8,8 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.heroku</groupId>
-	<artifactId>insuapp</artifactId>
+	<groupId>com.therich</groupId>
+	<artifactId>apps</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>insuapp</name>
 	<description>Demo project for Spring Boot</description>

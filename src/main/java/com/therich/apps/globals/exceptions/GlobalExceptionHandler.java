@@ -1,4 +1,4 @@
-package com.heroku.insuapp.globals.exceptions;
+package com.therich.apps.globals.exceptions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

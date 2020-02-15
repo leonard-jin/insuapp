@@ -1,6 +1,6 @@
-package com.heroku.insuapp.entrypoints.controllers.any;
+package com.therich.apps.entrypoints.controllers.any;
 
-import com.heroku.insuapp.entrypoints.controllers.BaseRestController;
+import com.therich.apps.entrypoints.controllers.BaseRestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
