@@ -11,14 +11,12 @@ import org.springframework.validation.BindingResult;
  */
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class BadRequestException extends BusinessException {
-
+public class BadRequestException extends AppsException {
     @Getter
-    private BindingResult bindingResult;
+    private BindingResult result;
 
-    public BadRequestException(BindingResult bindingResult) {
-        //super(ErrorCode.BAD_REQUEST);
-        this.bindingResult = bindingResult;
+    public BadRequestException(BindingResult result) {
+        this.result = result;
     }
 
     @Override

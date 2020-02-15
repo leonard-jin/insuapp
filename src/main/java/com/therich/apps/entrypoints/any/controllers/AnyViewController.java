@@ -1,4 +1,4 @@
-package com.therich.apps.entrypoints.controllers.any;
+package com.therich.apps.entrypoints.any.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

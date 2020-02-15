@@ -1,5 +1,6 @@
-package com.therich.apps.entrypoints;
+package com.therich.apps.entrypoints.commons.response;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ public class DefaultResponse<T> {
     private LocalDateTime timestamp;
     private T result;
 
+    @Builder
     public DefaultResponse(int code, int status, String message, T result) {
         this.code = code;
         this.status = status;
