@@ -37,6 +37,6 @@ public class Member extends Auditable<Long> {
     @Column(name = "mobile")
     @Getter private String mobile;
 
-    @Column(name = "social_secret_id")
-    @Getter private String socialSecretId;
+    @Column(name = "social_id")
+    @Getter private String socialId;
 }

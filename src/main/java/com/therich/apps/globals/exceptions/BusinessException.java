@@ -1,5 +1,6 @@
 package com.therich.apps.globals.exceptions;
 
+import com.therich.apps.globals.exceptions.codes.BusinessErrorCode;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -11,5 +12,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class BusinessException extends AppsException {
+    private BusinessErrorCode code;
 
+    public BusinessException(BusinessErrorCode code) {
+        this.code = code;
+    }
 }

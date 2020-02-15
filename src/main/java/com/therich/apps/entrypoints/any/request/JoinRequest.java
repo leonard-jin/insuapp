@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class JoinRequest {
@@ -32,9 +33,9 @@ public class JoinRequest {
     @JsonProperty("email")
     private String email;
 
-    @JsonProperty("social_secret_id")
+    @JsonProperty("social_id")
     @NotBlank
-    private String socialSecretId;
+    private String socialId;
 
     @JsonProperty("bank_code")
     @NotBlank
