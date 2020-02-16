@@ -22,7 +22,7 @@ public class ErrorResponse {
 
     @AllArgsConstructor(access = AccessLevel.PROTECTED)
     @Builder
-    public class ErrorItem {
+    static class ErrorItem {
         @Getter
         private String field;
         @Getter

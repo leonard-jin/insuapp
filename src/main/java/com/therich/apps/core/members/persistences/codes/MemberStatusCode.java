@@ -1,6 +1,7 @@
 package com.therich.apps.core.members.persistences.codes;
 
 import com.therich.apps.globals.exceptions.BusinessException;
+import com.therich.apps.globals.exceptions.codes.BusinessErrorCode;
 import lombok.Getter;
 
 import java.util.Map;
@@ -33,6 +34,6 @@ public enum MemberStatusCode {
             Stream.of(MemberStatusCode.values()).collect(Collectors.toMap(MemberStatusCode::getCode, Function.identity()));
 
     public MemberStatusCode from(int code) {
-        return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException());
+        return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException(BusinessErrorCode.DUPLICATE));
     }
 }
