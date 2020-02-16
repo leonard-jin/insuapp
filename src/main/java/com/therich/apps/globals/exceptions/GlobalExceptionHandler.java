@@ -12,12 +12,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+    @ExceptionHandler(BusinessException.class)
+    protected DefaultResponse<Void> handleBusinessException(BusinessException e) {
+        log.debug("[handle business] err code : {}", e.getCode());
+        return DefaultResponse
+                .<Void>builder()
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message(e.getMessage())
+                .build();
+    }
+
     @ExceptionHandler(BadRequestException.class)
     protected DefaultResponse<ErrorResponse> handleBadRequestException(BadRequestException e) {
         log.debug("[handle bad request] err response : {}", e.getResult());
         return DefaultResponse
                 .<ErrorResponse>builder()
-                .status(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.OK.value())
                 .result(new ErrorResponse(e.getResult()))
                 .build();
     }

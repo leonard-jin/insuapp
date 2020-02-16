@@ -1,6 +1,7 @@
 package com.therich.apps.core.members.services;
 
 import com.therich.apps.core.members.persistences.MemberRepositoryServiceImpl;
+import com.therich.apps.core.members.persistences.entities.Member;
 import com.therich.apps.entrypoints.any.request.JoinRequest;
 import com.therich.apps.globals.exceptions.BusinessException;
 import com.therich.apps.globals.exceptions.codes.BusinessErrorCode;
@@ -19,6 +20,8 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
     private final MemberRepositoryServiceImpl repository;
 
+    private final static String ERR_DUPLICATE_EMAIL_MSG = "이미 등록된 주민번호입니다.";
+
     @Autowired
     public MemberRegisterServiceImpl(@Qualifier("memberRepositoryServiceImpl") MemberRepositoryServiceImpl repository) {
         this.repository = repository;
@@ -28,14 +31,24 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
     public void join(JoinRequest request) {
         log.debug(">>>>> start member join.");
 
-        // 1. social secret id 중복 체크
-        if (repository.hasMemberBySocialSecretId(request.getSocialId())) {
-            throw new BusinessException(BusinessErrorCode.DUPLICATE);
+        if (repository.hasMemberByEmail(request.getEmail())) {
+            log.error("Already exist email address.");
+            throw new BusinessException(BusinessErrorCode.DUPLICATE, this.ERR_DUPLICATE_EMAIL_MSG);
         }
 
-        // 2. id 생성
+        Member member = Member.builder()
+                .email(request.getEmail())
+                .name(request.getName())
+                .mobile(request.getMobile())
+                .postCode(request.getPostCode())
+                .address(request.getAddress())
+                .socialId(request.getSocialId())
+                //.bankCode(request.getBankCode()) // todo : enum 처리
+                .bankAccount(request.getBankAccount())
+                .build();
+        log.debug("[member] created member. {}", member);
 
-        // 3. tb_member 저장
+
 
         // 4. tb_account 저장
 

@@ -4,10 +4,7 @@ import com.therich.apps.core.members.persistences.codes.RoleCode;
 import com.therich.apps.globals.persistences.Auditable;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by kh.jin on 2020. 2. 13.
@@ -21,8 +18,8 @@ import javax.persistence.Table;
 public class Account extends Auditable<Long> {
 
     @Id
-    @Column(name = "member_id")
-    @Getter private String id;
+    @Column(name = "member_no")
+    @Getter private Long no;
 
     @Column(name = "role_cd")
     private RoleCode role;
@@ -32,4 +29,7 @@ public class Account extends Auditable<Long> {
 
     @Column(name = "admin_level")
     private Integer adminLevel;
+
+    @OneToOne(mappedBy = "account")
+    private Member member;
 }

@@ -1,7 +1,5 @@
 package com.therich.apps.core.members.persistences;
 
-import com.therich.apps.core.members.persistences.entities.Account;
-import com.therich.apps.core.members.persistences.entities.Auth;
 import com.therich.apps.core.members.persistences.entities.Member;
 
 /**
@@ -9,11 +7,7 @@ import com.therich.apps.core.members.persistences.entities.Member;
  */
 public interface MemberRepositoryService {
 
-    boolean hasMemberBySocialSecretId(String socialSecretId);
+    boolean hasMemberByEmail(String email);
 
-    void createMember(Member member);
-
-    void createAccount(Account account);
-
-    void createAuth(Auth auth);
+    Member createMember(Member member);
 }

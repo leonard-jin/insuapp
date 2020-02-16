@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * Created by kh.jin on 2020. 2. 15.
  */
 @Repository
-public interface MemberJpaRepository extends JpaRepository<Member, Integer> {
+public interface MemberJpaRepository extends JpaRepository<Member, Long> {
 
-    Member findBySocialId(String socialSecretId);
+    Member findByEmail(String email);
 }

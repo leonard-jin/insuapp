@@ -1,7 +1,5 @@
 package com.therich.apps.core.members.persistences;
 
-import com.therich.apps.core.members.persistences.entities.Account;
-import com.therich.apps.core.members.persistences.entities.Auth;
 import com.therich.apps.core.members.persistences.entities.Member;
 import com.therich.apps.core.members.persistences.repositories.MemberJpaRepository;
 import org.slf4j.Logger;
@@ -24,23 +22,20 @@ public class MemberRepositoryServiceImpl implements MemberRepositoryService {
         this.memberJpaRepository = memberJpaRepository;
     }
 
+
     @Override
-    public boolean hasMemberBySocialSecretId(String socialSecretId) {
-        return memberJpaRepository.findBySocialId(socialSecretId) == null ? true : false;
+    public boolean hasMemberByEmail(String email) {
+        Member member = memberJpaRepository.findByEmail(email);
+        log.debug("find by email member : {}", member);
+        if (member == null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void createMember(Member member) {
-
+    public Member createMember(Member member) {
+        return memberJpaRepository.save(member);
     }
 
-    @Override
-    public void createAccount(Account account) {
-
-    }
-
-    @Override
-    public void createAuth(Auth auth) {
-
-    }
 }

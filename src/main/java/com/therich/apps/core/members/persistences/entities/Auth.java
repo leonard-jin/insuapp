@@ -3,10 +3,7 @@ package com.therich.apps.core.members.persistences.entities;
 import com.therich.apps.core.members.persistences.codes.MemberStatusCode;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -21,8 +18,8 @@ import java.time.LocalDateTime;
 public class Auth {
 
     @Id
-    @Column(name = "member_id")
-    @Getter private String id;
+    @Column(name = "member_no")
+    @Getter private Long no;
 
     @Column(name = "password")
     @Getter private String password;
@@ -41,4 +38,7 @@ public class Auth {
 
     @Column(name = "last_login_date")
     @Getter private LocalDateTime lastLoginDate;
+
+    @OneToOne(mappedBy = "auth")
+    private Member member;
 }
