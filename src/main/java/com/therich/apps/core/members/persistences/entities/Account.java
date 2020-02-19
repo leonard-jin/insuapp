@@ -32,4 +32,12 @@ public class Account extends Auditable<Long> {
 
     @OneToOne(mappedBy = "account")
     private Member member;
+
+    @Builder
+    public Account(Long no, RoleCode role, Integer ownerLevel, Integer adminLevel) {
+        this.no = no;
+        this.role = role;
+        this.ownerLevel = ownerLevel;
+        this.adminLevel = adminLevel;
+    }
 }

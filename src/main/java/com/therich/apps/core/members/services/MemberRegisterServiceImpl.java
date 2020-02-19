@@ -1,6 +1,9 @@
 package com.therich.apps.core.members.services;
 
 import com.therich.apps.core.members.persistences.MemberRepositoryServiceImpl;
+import com.therich.apps.core.members.persistences.codes.BankCode;
+import com.therich.apps.core.members.persistences.codes.RoleCode;
+import com.therich.apps.core.members.persistences.entities.Account;
 import com.therich.apps.core.members.persistences.entities.Member;
 import com.therich.apps.entrypoints.any.request.JoinRequest;
 import com.therich.apps.globals.exceptions.BusinessException;
@@ -10,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by kh.jin on 2020. 2. 15.
@@ -27,6 +31,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
         this.repository = repository;
     }
 
+    @Transactional
     @Override
     public void join(JoinRequest request) {
         log.debug(">>>>> start member join.");
@@ -36,23 +41,29 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
             throw new BusinessException(BusinessErrorCode.DUPLICATE, this.ERR_DUPLICATE_EMAIL_MSG);
         }
 
-        Member member = Member.builder()
+        Member member = repository.createMember(Member.builder()
                 .email(request.getEmail())
                 .name(request.getName())
                 .mobile(request.getMobile())
                 .postCode(request.getPostCode())
                 .address(request.getAddress())
                 .socialId(request.getSocialId())
-                //.bankCode(request.getBankCode()) // todo : enum 처리
+                .bankCode(BankCode.from(request.getBankCode()))
                 .bankAccount(request.getBankAccount())
-                .build();
+                .build());
+
         log.debug("[member] created member. {}", member);
 
+        Account account = repository.createAccount(Account.builder()
+                .no(member.getNo())
+                .ownerLevel(1)
+                .role(RoleCode.OWNER)
+                .build());
 
-
-        // 4. tb_account 저장
+        log.debug("[member] created account. {}", account);
 
         // 4. 패스워드 생성
+
 
         // 5. tb_auth 저장
         log.debug(">>>>> complete member join.");

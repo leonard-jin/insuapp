@@ -1,6 +1,8 @@
 package com.therich.apps.core.members.persistences;
 
+import com.therich.apps.core.members.persistences.entities.Account;
 import com.therich.apps.core.members.persistences.entities.Member;
+import com.therich.apps.core.members.persistences.repositories.AccountJpaRepository;
 import com.therich.apps.core.members.persistences.repositories.MemberJpaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +18,14 @@ public class MemberRepositoryServiceImpl implements MemberRepositoryService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final MemberJpaRepository memberJpaRepository;
+    private final AccountJpaRepository accountJpaRepository;
 
     @Autowired
-    public MemberRepositoryServiceImpl(@Qualifier("memberJpaRepository") MemberJpaRepository memberJpaRepository) {
+    public MemberRepositoryServiceImpl(@Qualifier("memberJpaRepository") MemberJpaRepository memberJpaRepository,
+                                       @Qualifier("accountJpaRepository") AccountJpaRepository accountJpaRepository) {
         this.memberJpaRepository = memberJpaRepository;
+        this.accountJpaRepository = accountJpaRepository;
     }
-
 
     @Override
     public boolean hasMemberByEmail(String email) {
@@ -38,4 +42,8 @@ public class MemberRepositoryServiceImpl implements MemberRepositoryService {
         return memberJpaRepository.save(member);
     }
 
+    @Override
+    public Account createAccount(Account account) {
+        return accountJpaRepository.save(account);
+    }
 }

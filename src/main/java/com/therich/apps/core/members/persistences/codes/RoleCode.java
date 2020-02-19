@@ -29,7 +29,7 @@ public enum RoleCode {
     private static final Map<Integer, RoleCode> map =
             Stream.of(RoleCode.values()).collect(Collectors.toMap(RoleCode::getCode, Function.identity()));
 
-    public RoleCode from(int code) {
+    public static RoleCode from(int code) {
         return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException(BusinessErrorCode.EMPTY));
     }
 }

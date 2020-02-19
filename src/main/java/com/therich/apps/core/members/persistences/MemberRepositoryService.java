@@ -1,5 +1,6 @@
 package com.therich.apps.core.members.persistences;
 
+import com.therich.apps.core.members.persistences.entities.Account;
 import com.therich.apps.core.members.persistences.entities.Member;
 
 /**
@@ -10,4 +11,6 @@ public interface MemberRepositoryService {
     boolean hasMemberByEmail(String email);
 
     Member createMember(Member member);
+
+    Account createAccount(Account account);
 }
