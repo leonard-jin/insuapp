@@ -1,5 +1,7 @@
 server:
   port: 8001
+  servlet:
+    context-path: /
 spring:
   profiles:
     active: local
@@ -9,3 +11,8 @@ spring:
       username: hope
       password: 1234
       driver-class-name: com.mysql.cj.jdbc.Driver
+springdoc:
+  api-docs:
+    path: /openapi/api-docs
+  swagger-ui:
+    path: /openapi/swagger-ui.html

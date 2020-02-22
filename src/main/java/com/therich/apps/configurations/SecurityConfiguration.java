@@ -18,7 +18,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/libs/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/openapi/**", "/webjars/**");
     }
 
     @Override
@@ -31,8 +31,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
                 .formLogin()
                 .loginPage("/page/login")
-                .successHandler(null)
-                .failureHandler(null)
+                //.successHandler(null)
+                //.failureHandler(null)
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .permitAll()

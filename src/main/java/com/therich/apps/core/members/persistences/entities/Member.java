@@ -29,7 +29,7 @@ public class Member extends Auditable<Long> {
     @Column(name = "member_nm")
     @Getter private String name;
 
-    @Column(name = "post_cd")
+    @Column(name = "post_code")
     @Getter private String postCode;
 
     @Column(name = "address")
@@ -48,11 +48,11 @@ public class Member extends Auditable<Long> {
     @Getter private String bankAccount;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "member_no")
     private Auth auth;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "member_no")
     private Account account;
 
     @Builder
