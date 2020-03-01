@@ -1,13 +1,15 @@
 server:
-  port: 8001
+  port: 8999
   servlet:
     context-path: /
+  compression:
+    mime-types: text/html, text/css, application/json
 spring:
   profiles:
     active: local
   datasource:
     hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/quiz?characterEncoding=utf8&useSSL=false&autoReconnection=true
+      jdbc-url: jdbc:mysql://localhost:3306/insuapp?characterEncoding=utf8&useSSL=false&autoReconnection=true
       username: hope
       password: 1234
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,3 +18,5 @@ springdoc:
     path: /openapi/api-docs
   swagger-ui:
     path: /openapi/swagger-ui.html
+logging:
+  config: classpath:logback/logback-spring.xml

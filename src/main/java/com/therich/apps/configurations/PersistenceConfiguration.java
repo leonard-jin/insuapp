@@ -1,6 +1,6 @@
 package com.therich.apps.configurations;
 
-import com.therich.apps.globals.persistences.AuditorAwareImpl;
+import com.therich.apps.configurations.persistence.AuditorAwareImpl;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
@@ -35,14 +35,12 @@ public class PersistenceConfiguration {
     @ConfigurationProperties("spring.datasource.hikari")
     public HikariConfig hikariConfig() {
         HikariConfig config = new HikariConfig();
-        log.info(">>>>> hikari config : {}", config);
         return config;
     }
 
     @Bean
     public DataSource dataSource() {
         DataSource dataSource = new HikariDataSource(hikariConfig());
-        log.info(">>>>> Created datasource. ");
         return dataSource;
     }
 
@@ -62,7 +60,12 @@ public class PersistenceConfiguration {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "none");
         properties.setProperty("hibernate.show-sql", "true");
+        properties.setProperty("hibernate.format_sql", "true");
+        properties.setProperty("hibernate.use_sql_comments", "true");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+
+
+        //properties.setProperty("hibernate.physical_naming_strategy" , "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
         return properties;
     }
 

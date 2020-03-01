@@ -1,7 +1,6 @@
 package com.therich.apps.core.members.persistences.entities;
 
-import com.therich.apps.core.members.persistences.codes.BankCode;
-import com.therich.apps.globals.persistences.Auditable;
+import com.therich.apps.configurations.persistence.Auditable;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "tb_member")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class Member extends Auditable<Long> {
@@ -21,16 +21,13 @@ public class Member extends Auditable<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_no")
     @Getter
-    private Long no;
+    private Long memberNo;
 
     @Column(name = "email")
     @Getter private String email;
 
     @Column(name = "member_nm")
     @Getter private String name;
-
-    @Column(name = "post_code")
-    @Getter private String postCode;
 
     @Column(name = "address")
     @Getter private String address;
@@ -40,30 +37,4 @@ public class Member extends Auditable<Long> {
 
     @Column(name = "social_id")
     @Getter private String socialId;
-
-    @Column(name = "bank_cd")
-    @Getter private BankCode bankCode;
-
-    @Column(name = "bank_account")
-    @Getter private String bankAccount;
-
-    @OneToOne
-    @JoinColumn(name = "member_no")
-    private Auth auth;
-
-    @OneToOne
-    @JoinColumn(name = "member_no")
-    private Account account;
-
-    @Builder
-    public Member(String email, String name, String postCode, String address, String mobile, String socialId, BankCode bankCode, String bankAccount) {
-        this.email = email;
-        this.name = name;
-        this.postCode = postCode;
-        this.address = address;
-        this.mobile = mobile;
-        this.socialId = socialId;
-        this.bankCode = bankCode;
-        this.bankAccount = bankAccount;
-    }
 }
