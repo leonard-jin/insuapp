@@ -1,7 +1,7 @@
-package com.therich.apps.core.members.usecase;
+package com.therich.apps.usecase.members;
 
-import com.therich.apps.core.members.persistences.entities.Account;
-import com.therich.apps.core.members.persistences.entities.Member;
+import com.therich.apps.dataproviders.persistences.members.entities.Account;
+import com.therich.apps.dataproviders.persistences.members.entities.Member;
 
 /**
  * Created by kh.jin on 2020. 2. 25.

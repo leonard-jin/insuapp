@@ -1,6 +1,6 @@
-package com.therich.apps.core.members.usecase;
+package com.therich.apps.usecase.members;
 
-import com.therich.apps.core.members.persistences.entities.Member;
+import com.therich.apps.dataproviders.persistences.members.entities.Member;
 import org.springframework.stereotype.Service;
 
 /**

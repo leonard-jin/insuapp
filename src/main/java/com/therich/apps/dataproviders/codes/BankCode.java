@@ -1,5 +1,4 @@
-package com.therich.apps.core.members.codes;
-
+package com.therich.apps.dataproviders.codes;
 
 import com.therich.apps.globals.exceptions.BusinessException;
 import com.therich.apps.globals.exceptions.codes.BusinessErrorCode;
@@ -32,6 +31,6 @@ public enum BankCode {
     private final static Map<String,BankCode> map = Stream.of(BankCode.values()).collect(Collectors.toMap(BankCode::getCode, Function.identity()));
 
     public static BankCode from(String code) {
-        return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException(BusinessErrorCode.EMPTY));
+        return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException(BusinessErrorCode.NO_DATA));
     }
 }

@@ -1,7 +1,7 @@
 package com.therich.apps.entrypoints.controllers.any;
 
-import com.therich.apps.core.members.usecase.MemberRegisterUseCase;
 import com.therich.apps.entrypoints.controllers.BaseRestController;
+import com.therich.apps.usecase.members.MemberRegisterUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;

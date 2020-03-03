@@ -1,4 +1,4 @@
-package com.therich.apps.core.members.codes;
+package com.therich.apps.dataproviders.codes;
 
 
 import com.therich.apps.globals.exceptions.BusinessException;
@@ -31,6 +31,6 @@ public enum RoleCode {
             Stream.of(RoleCode.values()).collect(Collectors.toMap(RoleCode::getCode, Function.identity()));
 
     public static RoleCode from(int code) {
-        return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException(BusinessErrorCode.EMPTY));
+        return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException(BusinessErrorCode.NO_DATA));
     }
 }

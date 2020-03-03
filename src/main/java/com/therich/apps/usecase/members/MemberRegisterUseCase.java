@@ -1,13 +1,13 @@
-package com.therich.apps.core.members.usecase;
+package com.therich.apps.usecase.members;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.therich.apps.core.members.codes.RoleCode;
-import com.therich.apps.core.members.persistences.entities.Account;
-import com.therich.apps.core.members.persistences.entities.Member;
+import com.therich.apps.dataproviders.codes.RoleCode;
+import com.therich.apps.dataproviders.persistences.members.entities.Account;
+import com.therich.apps.dataproviders.persistences.members.entities.Member;
 import com.therich.apps.globals.exceptions.AppsException;
 import com.therich.apps.globals.exceptions.BusinessException;
 import com.therich.apps.globals.exceptions.codes.BusinessErrorCode;
-import com.therich.apps.globals.services.encrypt.SHA256ServiceImpl;
+import com.therich.apps.globals.services.encrypt.SHA256EncoderHelper;
 import com.therich.apps.globals.services.encrypt.SaltGenerator;
 import com.therich.apps.globals.validators.SecretSocialId;
 import lombok.*;
@@ -43,7 +43,7 @@ public class MemberRegisterUseCase {
     public void join(Command command) {
         if (persistence.hasEmail(command.email)) {
             log.error("[business handle] {} is Already exist. ", command.email);
-            throw new BusinessException(BusinessErrorCode.DUPLICATE, this.ERR_DUPLICATE_EMAIL_MSG);
+            throw new BusinessException(BusinessErrorCode.CONFLICT, this.ERR_DUPLICATE_EMAIL_MSG);
         }
 
         Member member = mappingToMember(command);
@@ -72,7 +72,7 @@ public class MemberRegisterUseCase {
         String salt = SaltGenerator.generate();
         return Account.builder()
                 .email(command.email)
-                .password(SHA256ServiceImpl.getInstance().encypt(command.password, salt))
+                .password(SHA256EncoderHelper.getInstance().encypt(command.password, salt))
                 .salt(salt)
                 .loginFailedCount(0)
                 .lastLoginDate(LocalDateTime.now())

@@ -8,6 +8,8 @@ import java.util.Random;
  */
 public class SaltGenerator {
 
+    // TODO : encoder 속으로....
+
     private final static int DEFAULT_LENGTH = 10;
 
     public static String generate() {

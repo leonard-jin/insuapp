@@ -1,6 +1,6 @@
-package com.therich.apps.core.members.persistences.repositories;
+package com.therich.apps.dataproviders.persistences.members.repositories;
 
-import com.therich.apps.core.members.persistences.entities.Member;
+import com.therich.apps.dataproviders.persistences.members.entities.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

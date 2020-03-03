@@ -1,10 +1,10 @@
-package com.therich.apps.core.members.persistences;
+package com.therich.apps.dataproviders;
 
-import com.therich.apps.core.members.persistences.entities.Account;
-import com.therich.apps.core.members.persistences.entities.Member;
-import com.therich.apps.core.members.persistences.repositories.AccountJpaRepository;
-import com.therich.apps.core.members.persistences.repositories.MemberJpaRepository;
-import com.therich.apps.core.members.usecase.MemberRegisterPersistence;
+import com.therich.apps.dataproviders.persistences.members.entities.Account;
+import com.therich.apps.dataproviders.persistences.members.entities.Member;
+import com.therich.apps.dataproviders.persistences.members.repositories.AccountJpaRepository;
+import com.therich.apps.dataproviders.persistences.members.repositories.MemberJpaRepository;
+import com.therich.apps.usecase.members.MemberRegisterPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

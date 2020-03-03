@@ -1,13 +1,11 @@
-package com.therich.apps.core.members.persistences.entities;
+package com.therich.apps.dataproviders.persistences.members.entities;
 
 import com.therich.apps.configurations.persistence.Auditable;
-import com.therich.apps.core.members.codes.RoleCode;
+import com.therich.apps.dataproviders.codes.RoleCode;
+import com.therich.apps.dataproviders.codes.converters.RoleCodeConverter;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -18,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
+@ToString(exclude = "member")
 @EqualsAndHashCode(callSuper = false)
 public class Account extends Auditable<Long> {
 
@@ -41,9 +39,14 @@ public class Account extends Auditable<Long> {
     @Column(name = "last_login_date")
     @Getter private LocalDateTime lastLoginDate;
 
+    @Convert(converter = RoleCodeConverter.class)
     @Column(name = "role_cd")
     @Getter private RoleCode role;
 
     @Column(name = "level")
     @Getter private Integer level;
+
+    @Transient
+    @Setter
+    @Getter private Member member;
 }

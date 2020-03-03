@@ -1,8 +1,8 @@
-package com.therich.apps.core.members.persistences;
+package com.therich.apps.dataproviders;
 
-import com.therich.apps.core.members.persistences.entities.Account;
-import com.therich.apps.core.members.persistences.repositories.AccountJpaRepository;
-import com.therich.apps.core.members.usecase.AccountReadPersistence;
+import com.therich.apps.dataproviders.persistences.members.entities.Account;
+import com.therich.apps.dataproviders.persistences.members.repositories.AccountJpaRepository;
+import com.therich.apps.usecase.members.AccountReadPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +21,6 @@ public class AccountReadPersistenceImpl implements AccountReadPersistence {
 
     @Override
     public Account findId(String email) {
-        return repository.findById(email).get();
+        return repository.findById(email).orElse(null);
     }
 }

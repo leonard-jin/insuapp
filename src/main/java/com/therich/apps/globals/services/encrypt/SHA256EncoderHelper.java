@@ -10,14 +10,14 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by kh.jin on 2020. 2. 25.
  */
-public class SHA256ServiceImpl implements EncryptService {
+public class SHA256EncoderHelper implements EncoderHelper {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private SHA256ServiceImpl() {
+    private SHA256EncoderHelper() {
         // do nothing
     }
 
-    public static SHA256ServiceImpl getInstance() {
+    public static SHA256EncoderHelper getInstance() {
         return SHA256Holder.INSTANCE;
     }
 
@@ -56,6 +56,6 @@ public class SHA256ServiceImpl implements EncryptService {
      * 참고 사이트 : https://jeong-pro.tistory.com/86 (JVM 에게 싱글톤 생성에 대한 책임을 넘긴다.)
      */
     private static class SHA256Holder {
-        private static final SHA256ServiceImpl INSTANCE = new SHA256ServiceImpl();
+        private static final SHA256EncoderHelper INSTANCE = new SHA256EncoderHelper();
     }
 }

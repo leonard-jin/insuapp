@@ -1,4 +1,4 @@
-package com.therich.apps.core.members.codes;
+package com.therich.apps.dataproviders.codes;
 
 
 import com.therich.apps.globals.exceptions.BusinessException;
@@ -35,6 +35,6 @@ public enum MemberStatusCode {
             Stream.of(MemberStatusCode.values()).collect(Collectors.toMap(MemberStatusCode::getCode, Function.identity()));
 
     public MemberStatusCode from(int code) {
-        return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException(BusinessErrorCode.DUPLICATE));
+        return Optional.ofNullable(map.get(code)).orElseThrow(() -> new BusinessException(BusinessErrorCode.CONFLICT));
     }
 }

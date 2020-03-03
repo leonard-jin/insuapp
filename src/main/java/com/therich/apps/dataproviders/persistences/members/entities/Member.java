@@ -1,4 +1,4 @@
-package com.therich.apps.core.members.persistences.entities;
+package com.therich.apps.dataproviders.persistences.members.entities;
 
 import com.therich.apps.configurations.persistence.Auditable;
 import lombok.*;

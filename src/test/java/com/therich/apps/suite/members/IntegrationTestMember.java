@@ -1,7 +1,7 @@
 //package com.therich.apps.suite.members;
 //
 //import com.therich.apps.Application;
-//import com.therich.apps.core.members.usecase.MemberRegisterUseCase;
+//import com.therich.apps.core.members.MemberRegisterUseCase;
 //import org.junit.runner.RunWith;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,7 +20,7 @@
 // * Created by kh.jin on 2020. 2. 28.//package com.therich.apps.suite.members;
 ////
 ////import com.therich.apps.Application;
-////import com.therich.apps.core.members.usecase.MemberRegisterUseCase;
+////import com.therich.apps.core.members.MemberRegisterUseCase;
 ////import org.junit.runner.RunWith;
 ////import org.springframework.beans.factory.annotation.Autowired;
 ////import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

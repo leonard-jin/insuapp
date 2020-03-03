@@ -1,4 +1,4 @@
-package com.therich.apps.core.members.codes;
+package com.therich.apps.dataproviders.codes;
 
 import lombok.Getter;
 

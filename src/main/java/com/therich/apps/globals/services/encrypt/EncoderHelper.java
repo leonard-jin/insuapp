@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by kh.jin on 2020. 2. 25.
  */
-public interface EncryptService {
+public interface EncoderHelper {
     String encypt(String source) throws NoSuchAlgorithmException;
     String encypt(String source, String salt) throws NoSuchAlgorithmException;
 }
