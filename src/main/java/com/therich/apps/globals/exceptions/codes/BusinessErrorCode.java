@@ -9,5 +9,8 @@ public enum BusinessErrorCode {
     CONFLICT
     ,
     NOT_MATCH
+    ,
+    INVALID
+    ,
     ;
 }

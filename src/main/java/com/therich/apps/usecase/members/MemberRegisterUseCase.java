@@ -10,11 +10,12 @@ import com.therich.apps.globals.exceptions.codes.BusinessErrorCode;
 import com.therich.apps.globals.services.encrypt.SHA256EncoderHelper;
 import com.therich.apps.globals.services.encrypt.SaltGenerator;
 import com.therich.apps.globals.validators.SecretSocialId;
+import com.therich.apps.usecase.recommend.RecommendRegisterUseCase;
 import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,13 +30,14 @@ import java.time.LocalDateTime;
 @Service
 public class MemberRegisterUseCase {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-
+    private final ApplicationEventPublisher publisher;
     private final MemberRegisterPersistence persistence;
-
     private final static String ERR_DUPLICATE_EMAIL_MSG = "이미 등록된 Email 입니다..";
 
     @Autowired
-    public MemberRegisterUseCase(@Qualifier("memberRegisterPersistenceImpl") MemberRegisterPersistence persistence) {
+    public MemberRegisterUseCase(ApplicationEventPublisher publisher,
+                                 MemberRegisterPersistence persistence) {
+        this.publisher = publisher;
         this.persistence = persistence;
     }
 
@@ -56,6 +58,12 @@ public class MemberRegisterUseCase {
             throw new AppsException();
         }
 
+        publisher.publishEvent(RecommendRegisterUseCase
+                .Command
+                .builder()
+                .memberNo(member.getMemberNo())
+                .recommendEmail(command.recommendMemberId)
+                .build());
     }
 
     private Member mappingToMember(Command command) {
