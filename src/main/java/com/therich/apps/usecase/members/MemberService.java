@@ -1,6 +1,6 @@
 package com.therich.apps.usecase.members;
 
-import com.therich.apps.dataproviders.persistences.members.entities.Member;
+import com.therich.apps.dataproviders.members.persistence.entity.Member;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     public Member getMemberByEmail(String email) {
-        return Member.builder().build();
+        //return Member.builder().build();
+        return null;
     }
 }

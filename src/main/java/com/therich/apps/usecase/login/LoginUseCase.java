@@ -1,6 +1,6 @@
 package com.therich.apps.usecase.login;
 
-import com.therich.apps.dataproviders.persistences.members.entities.Account;
+import com.therich.apps.dataproviders.members.persistence.entity.Account;
 import com.therich.apps.globals.exceptions.AppsException;
 import com.therich.apps.globals.exceptions.BusinessException;
 import com.therich.apps.globals.exceptions.codes.BusinessErrorCode;
@@ -21,15 +21,14 @@ import java.security.NoSuchAlgorithmException;
 public class LoginUseCase {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private final LoginPersistence persistence;
+    private final LoginDataProvider dataProvider;
 
     @Autowired
-    public LoginUseCase(LoginPersistence persistence) {
-        this.persistence = persistence;
+    public LoginUseCase(LoginDataProvider dataProvider) {
+        this.dataProvider = dataProvider;
     }
-
     public Account login(String id, String password) {
-        Account account = persistence.findAccount(id);
+        Account account = dataProvider.findAccount(id);
         if (account == null) {
             throw new BusinessException(BusinessErrorCode.NO_DATA);
         }
@@ -39,21 +38,13 @@ public class LoginUseCase {
             throw new BusinessException(BusinessErrorCode.NOT_MATCH);
         }
 
-        account.setMember(persistence.findMember(id));
-        log.debug("[LoginUseCase] result : {}", account);
-
-        //TODO : account 의 데이터 초기화, 로그인 이력 등 비지니스 처리
+        // todo : 로그인 성공 시 여러가지 비지니스 (이력, 로그인 시간, 등등)
         return account;
     }
 
-    private boolean verifyCredential(Account account, String password) {
-        try {
-            String salt = account.getSalt();
-            String encypt = SHA256EncoderHelper.getInstance().encypt(password, salt);
-            return account.getPassword().equals(encypt);
-        } catch (NoSuchAlgorithmException e) {
-            log.error("error. verified password.");
-            throw new AppsException();
-        }
+    private boolean verifyCredential(Account account, String password) throws NoSuchAlgorithmException {
+        String salt = account.getSalt();
+        String encypt = SHA256EncoderHelper.getInstance().encypt(password, salt);
+        return account.getPassword().equals(encypt);
     }
 }

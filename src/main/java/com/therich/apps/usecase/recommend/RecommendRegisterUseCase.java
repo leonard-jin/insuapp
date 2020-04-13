@@ -1,8 +1,8 @@
 package com.therich.apps.usecase.recommend;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.therich.apps.dataproviders.persistences.members.entities.Member;
-import com.therich.apps.dataproviders.persistences.recommend.entities.Recommend;
+import com.therich.apps.dataproviders.members.persistence.entity.Member;
+import com.therich.apps.dataproviders.recommends.persistence.entity.Recommend;
 import com.therich.apps.globals.exceptions.BusinessException;
 import com.therich.apps.globals.exceptions.codes.BusinessErrorCode;
 import lombok.*;
@@ -20,32 +20,31 @@ import javax.validation.constraints.Email;
 @Service
 public class RecommendRegisterUseCase {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-    private final RecommendRegisterPersistence persistence;
+    private final RecommendRegisterDataProvider dataProvider;
 
-    public RecommendRegisterUseCase(RecommendRegisterPersistence persistence) {
-        this.persistence = persistence;
+    public RecommendRegisterUseCase(RecommendRegisterDataProvider dataProvider) {
+        this.dataProvider = dataProvider;
     }
 
     public void register(Command command) {
-        Member recommendMember = persistence.findMember(command.recommendEmail);
+        Member recommendMember = dataProvider.findMember(command.recommendEmail);
         if (recommendMember == null) {
             log.error("[RECOMMEND] not found. recommend member. email : {}", command.recommendEmail);
             throw new BusinessException(BusinessErrorCode.NO_DATA);
         }
 
-        Integer count = persistence.countRecommend(recommendMember.getMemberNo());
+        Integer count = dataProvider.countRecommend(recommendMember.getMemberNo());
         if (count > 1) {
             log.error("[RECOMMEND] Don't added. child member : {}", count);
             throw new BusinessException(BusinessErrorCode.INVALID);
         }
 
-        Recommend recommend = new Recommend(
-                Recommend.PK.builder()
-                        .memberNo(command.memberNo)
-                        .parentMemberNo(recommendMember.getMemberNo())
-                        .build(), count);
-
-        persistence.registerRecommend(recommend);
+        dataProvider.registerRecommend(Recommend
+                .builder()
+                .parentMemberNo(recommendMember.getMemberNo())
+                .memberNo(command.memberNo)
+                .pos(count)
+                .build());
         log.debug("[RECOMMEND] completed register.");
     }
 

@@ -1,6 +1,6 @@
 package com.therich.apps.configurations.security;
 
-import com.therich.apps.dataproviders.persistences.members.entities.Account;
+import com.therich.apps.dataproviders.members.persistence.entity.Account;
 import com.therich.apps.globals.exceptions.BusinessException;
 import com.therich.apps.globals.exceptions.codes.BusinessErrorCode;
 import com.therich.apps.usecase.login.LoginUseCase;

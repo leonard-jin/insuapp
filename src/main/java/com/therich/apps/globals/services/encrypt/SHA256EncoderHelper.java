@@ -1,5 +1,6 @@
 package com.therich.apps.globals.services.encrypt;
 
+import com.therich.apps.globals.exceptions.AppsException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,32 +23,36 @@ public class SHA256EncoderHelper implements EncoderHelper {
     }
 
     @Override
-    public String encypt(String source) throws NoSuchAlgorithmException {
-        return encypt(source, SaltGenerator.generate());
+    public String encypt(String source) {
+       return encypt(source, SaltGenerator.generate());
     }
 
     @Override
-    public String encypt(String source, String salt) throws NoSuchAlgorithmException {
+    public String encypt(String source, String salt)  {
+        try {
+            byte[] bSource = source.getBytes();
+            byte[] bSalt = salt.getBytes();
+            byte[] bEcrypt = new byte[bSource.length + bSalt.length];
 
-        byte[] bSource = source.getBytes();
-        byte[] bSalt = salt.getBytes();
-        byte[] bEcrypt = new byte[bSource.length + bSalt.length];
+            System.arraycopy(bSource, 0, bEcrypt, 0, bSource.length);
+            System.arraycopy(bSalt, 0, bEcrypt, bSource.length, bSalt.length);
 
-        System.arraycopy(bSource, 0, bEcrypt, 0, bSource.length);
-        System.arraycopy(bSalt, 0, bEcrypt, bSource.length, bSalt.length);
+            log.debug("copied byte : {}", bEcrypt);
 
-        log.debug("copied byte : {}", bEcrypt);
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(bEcrypt);
 
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(bEcrypt);
-
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bEcrypt) {
-            sb.append(String.format("%02x", b));
+            StringBuilder sb = new StringBuilder();
+            for (byte b : bEcrypt) {
+                sb.append(String.format("%02x", b));
+            }
+            log.debug("convert to hex value : {}", sb.toString());
+            return DigestUtils.sha256Hex(sb.toString());
+        } catch (NoSuchAlgorithmException e) {
+            log.error("[error] NoSuchAlgorithmException.");
+            log.error("e ; {}", e.toString());
+            throw new AppsException();
         }
-
-        log.debug("convert to hex value : {}", sb.toString());
-        return DigestUtils.sha256Hex(sb.toString());
     }
 
     /**

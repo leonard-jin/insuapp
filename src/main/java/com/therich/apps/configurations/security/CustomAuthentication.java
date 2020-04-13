@@ -1,6 +1,6 @@
 package com.therich.apps.configurations.security;
 
-import com.therich.apps.dataproviders.persistences.members.entities.Account;
+import com.therich.apps.dataproviders.members.persistence.entity.Account;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
